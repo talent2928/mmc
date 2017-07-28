@@ -13,7 +13,7 @@ class VerifycodeController extends Controller {
 
     public function check_verify()
     {
-        //print_r($_SESSION);//1234567891011121314151617
+        //print_r($_SESSION);//123456789101112131415161718
         $code = I("verifycode");
         $verify = new \Think\Verify();
         if($verify->check($code)){
