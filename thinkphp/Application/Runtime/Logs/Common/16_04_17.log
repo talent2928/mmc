@@ -1,0 +1,6 @@
+[ 2016-04-17T13:41:16+08:00 ] 127.0.0.1 /test/thinkphp/?c=Test&a=test&id=1&m=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001001s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001001s ]
+ERR: 无法加载模块:1
+

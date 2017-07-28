@@ -1,0 +1,56 @@
+<script src="/Public/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var verify_flag = false;
+        $("#ajaxsubmit").click(function(){
+            /*$.post("./index.php?m=Home&c=Verifycode&a=check_verify", $("#myform").serialize(),
+                    function(data){
+                        alert(data.msg);
+                        if(data.status == 0){
+                            //window.location.href = './index.php?m=Admin&c=Index&a=index';
+                            return true
+                        }else{
+                            $("#verifycode").focus();
+                            verify_flag  = false;
+                            //return false;
+                        }
+                    },'json');*/
+            $.ajax({
+                type: "POST",
+                url: "./index.php?m=Home&c=Verifycode&a=check_verify",
+                async: false,
+                dataType: "json",
+                data: $("#myform").serialize(),
+                success: function(data){
+                    alert(data.msg);
+                    if(data.status == 0){
+                        //window.location.href = './index.php?m=Admin&c=Index&a=index';
+                        verify_flag = true;
+                        //return true
+                    }else{
+                        $("#verifycode").focus();
+                       //verify_flag  = false;
+                        //return false;
+                    }
+                }
+            });
+            if(verify_flag == false){
+                return false;
+            }else{
+                alert("继续处理数据库动作");
+            }
+        });
+        /*$("#verify_img").click(function(e){
+            $(this).attr("src","{:U('verifycode/create')}");
+        });*/
+    });
+
+
+
+</script>
+<form action="#" id="myform" onsubmit="return checkForm()">
+    <div>注册</div>
+    <img id="verify_img1" onclick="this.src=this.src+'?'" src="{:U('verifycode/create')}">
+    <input type="text" name="verifycode" id="verifycode">
+    <input type="button" value="提交" id="ajaxsubmit" name="ajaxsubmit" >
+</form>
