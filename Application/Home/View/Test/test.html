@@ -1,0 +1,75 @@
+<script src="/Public/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+    });
+</script>
+789
+{$test}
+<br>
+<foreach name="test_array" item="value" key="k" >   {$k}|{$value}<br>
+</foreach>
+<table>
+    <tr><td>id<td><td>名称</td><td>pid</td><td>number</td></tr>
+    <foreach name="data_array" item="value" key="k" >
+        <tr><td>{$value['id']}<td><td>{$value['name']}</td><td>{$value['pid']}</td><td>{$value['number']}</td></tr>
+    </foreach>
+</table>
+{$Think.const.TEST_DEFINE}
+{$Think.server.script_filename}
+{$Think.get.id}
+{$Think.get.id|default="名称为空"}
+<?php
+if(0){
+?>
+abc
+<?php
+    }else{
+?>
+df
+<?php
+}
+?>
+<eq name = "test" value="22">
+    hha
+</eq>
+<if condition="$show_array['name'] eq 'wl'">
+    ThinkPHP
+    <else /> other Framework
+</if>
+<if condition="$show_array['number']['code'] eq '2928'">
+    2928
+    <elseif condition="$show_array['number']['code'] eq '02122928'"/>
+    show_array_value2
+    <elseif condition="$show_array['number']['code'] eq $test"/>
+    show_array_value3
+    <else />
+    not2928
+</if>
+<switch name="show_array['name']">
+    <case value="wl">value1</case>
+    <case value="2">value2</case>
+    <default />default
+</switch>
+
+<php>
+    if( $show_array['number']['code'] == '2928' )
+    echo  'phptag' ;
+</php>
+
+<in name="test" value="$test_array">
+    in在范围内
+</in>
+
+<between name="test" value="$test_array">
+    between在范围内
+</between>
+<php>
+    <literal>
+        echo '{$Think.config.CUSTOM.'.$key.'}';
+    </literal>
+</php>
+
+<img src="/Public/img/next.jpg">
+
+
+

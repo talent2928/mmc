@@ -1,0 +1,99 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <LINK rel="Bookmark" href="/favicon.ico" >
+    <LINK rel="Shortcut Icon" href="/favicon.ico" />
+
+    <include file="Index:css"/>
+</head>
+<body>
+<article class="page-container">
+    <form action="{:U('Admin/admin_edit')}" method="post" class="form form-horizontal" id="admin_edit">
+        <input type="hidden" name="admin_id" value="{$info.admin_id}" />
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" name="admin_name" value="{$info.admin_name}" style="width: 260px;">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" name="real_name" value="{$info.real_name}" style="width: 260px;">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="password" class="input-text" name="pass_word" style="width: 260px;">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
+            <div class="formControls col-xs-8 col-sm-5"> <span class="select-box">
+				<select name="role_id" class="select">
+                    <option value="0">请选择</option>
+                    <volist name="role_list" id="vo">
+                        <option value="{$vo.role_id}" <eq name="info.role_id" value="$vo.role_id">selected="selected"</eq> >{$vo.role_name}</option>
+                    </volist>
+                </select>
+				</span> </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<script type="text/javascript" src="/Public/js/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/js/jquery.form.js"></script>
+<script type="text/javascript" src="/Public/js/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="/Public/js/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="/Public/js/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/Public/js/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/Public/js/jquery.validation/1.14.0/messages_zh.min.js"></script>
+<script type="text/javascript" src="/Public/js/h-ui/H-ui.js"></script>
+<script type="text/javascript" src="/Public/js/h-ui/H-ui.admin.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $("#admin_edit").validate({
+            rules:{
+
+            },
+            focusCleanup:true,
+            success:"valid",
+            submitHandler:function(form){
+                $(form).ajaxSubmit(
+                        {
+                            type:"post",  //提交方式
+                            dataType:"json", //数据类型
+                            success:function(res){
+                                if(res.status==-1){
+                                    alert(res.msg);
+                                }else{
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.location.reload();
+                                    parent.$('.btn-refresh').click();
+                                    parent.layer.close(index);
+                                }
+                            },
+                            error:function(){
+                                alert('提交失败!');
+                            }
+                        }
+                );
+            }
+        });
+    });
+</script>
+</body>
+</html>
