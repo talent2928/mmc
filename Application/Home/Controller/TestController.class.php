@@ -4,7 +4,7 @@ use Think\Controller;
 class TestController extends Controller {
     public function test(){
         $arraylist = new \Org\Util\ArrayList();
-        $b = 121234567912;
+        $b = 121234567913;
         $test_logic = new \Home\Logic\TestLogic();
         //$admin = new \Admin\Controller\TestController();
         //$admin = A('Admin/Test');
